@@ -1,12 +1,13 @@
+#will not allow autoregistration
 SET AllowAutoRegistration false
-//will not allow autoregistration
 
+#will not activate the user on registration
 SET ActivateUsersOnReg false
-//will not activate the user on registration
 
+#fire the script
 CREATE HANDLER validateUser     POST ON /FFUser CREATE AS javascript:require ('scripts/UserActivation.js').validateUser();
 
-//fire the script
+
 
 CREATE OBJECTTYPE ActivationRequest (userGuid STRING)
 CREATE COLLECTION /ActivationRequest OBJECTTYPE ActivationRequest
