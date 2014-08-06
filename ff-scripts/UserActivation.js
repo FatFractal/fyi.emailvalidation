@@ -24,7 +24,7 @@ exports.validateUser = function() {
 
         ff.sendEmail(
             {
-                host:"smtpout.secureserver.net", port:"465",
+                host:"<YourSMTPHost>", port:"465",
                 auth:"true", authPort:"465",
                 username:"<InsertYourUserNameHere>", password:"<InsertYourPasswordHere",
                 from:"system@fatfractal.com",
