@@ -1,0 +1,17 @@
+SET AllowAutoRegistration false
+//will not allow autoregistration
+
+SET ActivateUsersOnReg false
+//will not activate the user on registration
+
+CREATE HANDLER validateUser     POST ON /FFUser CREATE AS javascript:require ('scripts/UserActivation.js').validateUser();
+
+//fire the script
+
+CREATE OBJECTTYPE ActivationRequest (userGuid STRING)
+CREATE COLLECTION /ActivationRequest OBJECTTYPE ActivationRequest
+PERMIT read:system.admins write:system.admins ON /ActivationRequest
+
+CREATE EXTENSION /verifyRegistration   UNSECURED AS javascript:require ('scripts/UserActivation.js').verifyRegistration();
+
+SET CORS http://beta.fatfractal.com https://beta.fatfractal.com http://system.fatfractal.com https://system.fatfractal.com
