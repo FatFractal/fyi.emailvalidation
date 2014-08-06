@@ -1,0 +1,75 @@
+<html> 
+<head> 
+<script type="text/javascript"> 
+	function httpsRedirect() { 
+		var httpURL = window.location.hostname + window.location.pathname; 
+		var httpsURL = "https://" + httpURL; 
+		window.location = httpsURL; 
+	} 
+	console.log(window.location.href); 
+	if (!window.location.href.match('^https://') && !window.location.href.match('^http://localhost')) 
+		httpsRedirect(); 
+</script> 
+
+<script type="text/javascript" src="//www.fatfractal.com/prod/js/FatFractal.latest.js"></script> 
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
+
+<link rel="stylesheet" href="normalize.css"> 
+<link rel="stylesheet" href="style.css"> 
+
+</head> 
+
+<body> 
+	<section class="loginform cf"> 
+		<h1>Sample</h1> 
+
+		<h2 id="message">Hello</h2>
+
+		<div id="registerform"> 
+			<form name="register" onsubmit="doRegister(); return false;" accept-charset="utf-8"> 
+				<ul> 
+					<li> 
+						<label for="username">Username</label> 
+						<input id="username" type="username" name="username" placeholder="User Name" required> 
+					</li> 
+					<li> 
+						<label for="password">Password</label> 
+						<input id="password" type="password" name="password" placeholder="Password" required></li> 
+					<li> 
+						<label for="email">Email Address</label> 
+						<input id="email" type="email" name="email" placeholder="you@example.com" required></li> 
+					<li> 
+						<input type="submit" value="Login"> 
+					</li>
+				</ul> 
+			</form> 
+		</div> 
+	</section> 
+	<script type="text/javascript"> 
+		var ff = new FatFractal(); 
+		var _document = document; 
+		var _window = window; 
+		console.log(_document, _window); 
+
+		function doRegister() {
+			_document.getElementById("message").innerHTML = 'Registering ...';
+			ff.register(
+				{
+				userName:_document.getElementById('username').value,
+				password:_document.getElementById('password').value,
+				email:_document.getElementById('email').value
+				},
+				function (result, statusMessage) {
+					_document.getElementById("message").innerHTML = 'Registration succeeded - you should receive an email shortly';
+				}, 
+				function (statusCode, responseText) { 
+					_document.getElementById("message").innerHTML = JSON.parse(responseText)['statusMessage'];
+			}); 
+			return false; 
+		} 
+	</script> 
+
+</body> 
+
+</html> 
+
