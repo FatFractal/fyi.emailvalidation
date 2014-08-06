@@ -27,7 +27,7 @@ exports.validateUser = function() {
                 host:"<YourSMTPHost>", port:"465",
                 auth:"true", authPort:"465",
                 username:"<InsertYourUserNameHere>", password:"<InsertYourPasswordHere",
-                from:"system@fatfractal.com",
+                from:"<InsertYourUserNameHere>",
                 fromName:"[My Shiny App]",
                 to:user.email,
                 subject:"Activate your account",
